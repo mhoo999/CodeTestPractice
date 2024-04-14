@@ -15,7 +15,7 @@ int main()
 	int iter = 1;
 	int num = 666;
 
-	while (iter < 10001)
+	while (iter <= N)
 	{
 		string toString = to_string(num);
 
