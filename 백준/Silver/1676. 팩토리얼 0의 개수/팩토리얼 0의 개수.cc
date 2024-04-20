@@ -9,7 +9,7 @@ int main()
 	int N;
 	cin >> N;
 
-	int cnt = N / 5 + N / 25 + N / 125 + N / 625;
+	int cnt = N / 5 + N / 25 + N / 125;
 
 	cout << cnt;
 
