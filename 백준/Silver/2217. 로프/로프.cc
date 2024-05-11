@@ -23,8 +23,6 @@ int main()
 
 	sort(vec.rbegin(), vec.rend());
 
-	int cnt = 1;
-
 	for (int i = 0; i < vec.size(); ++i)
 	{
 		int x = vec[i] * (i + 1);
@@ -33,8 +31,6 @@ int main()
 		{
 			max = x;
 		}
-
-		cnt++;
 	}
 
 	cout << max;
