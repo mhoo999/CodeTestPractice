@@ -6,31 +6,31 @@ using namespace std;
 
 int main()
 {
-    ios::sync_with_stdio(false);
-    cin.tie(nullptr);
+	ios::sync_with_stdio(false);
+	cin.tie(nullptr);
 
-    int n;
-    cin >> n;
+	int n;
+	cin >> n;
 
-    unordered_map<long long, int> freq;
-    long long max_freq_number = numeric_limits<long long>::max();
-    int max_freq = 0;
+	unordered_map<long long, int> arr;
+	long long freq_num = numeric_limits<long long>::max();
+	int max_freq = 0;
 
-    while (n--)
-    {
-        long long x;
-        cin >> x;
+	while (n--)
+	{
+		long long x;
+		cin >> x;
 
-        freq[x]++;
+		arr[x]++;
 
-        if (freq[x] > max_freq || (freq[x] == max_freq && x < max_freq_number))
-        {
-            max_freq = freq[x];
-            max_freq_number = x;
-        }
-    }
+		if (arr[x] > max_freq || (arr[x] == max_freq && x < freq_num))
+		{
+			max_freq = arr[x];
+			freq_num = x;
+		}
+	}
 
-    cout << max_freq_number;
+	cout << freq_num;
 
-    return 0;
+	return 0;
 }
