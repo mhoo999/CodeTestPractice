@@ -1,48 +1,47 @@
 #include <iostream>
-#include <vector>
-#include <string.h>
 #include <queue>
+#include <vector>
 #include <algorithm>
 
 using namespace std;
 
-vector<int> vec[10002];
-vector<int> result_dfs;
-vector<int> result_bfs;
-bool visit[1002];
+int N, M, V;
+vector<int> Graph[1001];
+bool visited[1001];
 
-void dfs(int x)
+void DFS(int node)
 {
-	visit[x] = true;
-	result_dfs.push_back(x);
+	cout << node << ' ';
+	visited[node] = true;
 
-	for (int i = 0; i < vec[x].size(); ++i)
+	for (int next : Graph[node])
 	{
-		if (!visit[vec[x][i]])
+		if (!visited[next])
 		{
-			dfs(vec[x][i]);
+			DFS(next);
 		}
 	}
 }
 
-void bfs(int temp)
+void BFS(int start)
 {
 	queue<int> q;
-	q.push(temp);
-	visit[temp] = true;
+	q.push(start);
+	visited[start] = true;
 
 	while (!q.empty())
 	{
-		int x = q.front();
+		int node = q.front();
 		q.pop();
-		result_bfs.push_back(x);
 
-		for (int i = 0; i < vec[x].size(); ++i)
+		cout << node << ' ';
+
+		for (int next : Graph[node])
 		{
-			if (!visit[vec[x][i]])
+			if (!visited[next])
 			{
-				q.push(vec[x][i]);
-				visit[vec[x][i]] = true;
+				q.push(next);
+				visited[next] = true;
 			}
 		}
 	}
@@ -50,35 +49,29 @@ void bfs(int temp)
 
 int main()
 {
-	int n, m, v, a, b;
-	cin >> n >> m >> v;
+	cin >> N >> M >> V;
 
-	for (int i = 1; i <= m; ++i)
+	for (int i = 0; i < M; ++i)
 	{
-		cin >> a >> b;
-		vec[a].push_back(b);
-		vec[b].push_back(a);
+		int x, y;
+		cin >> x >> y;
+
+		Graph[x].push_back(y);
+		Graph[y].push_back(x);
 	}
 
-	for (int i = 1; i <= n; ++i)
+	for (int i = 1; i <= N; i++)
 	{
-		sort(vec[i].begin(), vec[i].end());
+		sort(Graph[i].begin(), Graph[i].end());
 	}
 
-	dfs(v);
-	memset(visit, false, sizeof(visit));
-	bfs(v);
+	fill(visited, visited + 1001, false);
+	DFS(V);
 
-	for (int i = 0; i < result_dfs.size(); ++i)
-	{
-		cout << result_dfs[i] << " ";
-	}
-	cout << "\n";
-	for (int i = 0; i < result_bfs.size(); ++i)
-	{
-		cout << result_bfs[i] << " ";
-	}
+	cout << '\n';
 
+	fill(visited, visited + 1001, false);
+	BFS(V);
 
 	return 0;
 }
